@@ -1,7 +1,7 @@
 const photos = [
-  { src: './photos/memory-01.webp', alt: 'Bé Hoa và anh chụp ảnh cùng nhau' },
-  { src: './photos/memory-02.webp', alt: 'Bé Hoa và anh đội mũ chụp ảnh trong gương', portrait: true },
   { src: './photos/memory-03.webp', alt: 'Bé Hoa mỉm cười, đặt hai tay bên má', portrait: true },
+  { src: './photos/memory-02.webp', alt: 'Bé Hoa và anh đội mũ chụp ảnh trong gương', portrait: true },
+  { src: './photos/memory-01.webp', alt: 'Bé Hoa và anh chụp ảnh cùng nhau' },
 ];
 
 document.querySelectorAll('[data-photo-slot]').forEach((card, index) => {
