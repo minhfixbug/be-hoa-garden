@@ -32,6 +32,7 @@
 .wildflower-leaf.right{left:65%;top:62%;transform:rotate(-29deg) scaleX(-1)}
 .wildflower-head{position:absolute;z-index:1;left:0;top:0;width:var(--size);height:var(--size);animation:wildflower-sway 8s ease-in-out infinite;animation-delay:var(--delay)}
 .botanical-svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(1px 3px 2px #75596a3d)}
+.botanical-rose{object-fit:contain}
 .hero-art .flower .botanical-svg{filter:drop-shadow(2px 7px 5px #9c6d7342)}
 .wildflower-head .botanical-svg{width:var(--size);height:var(--size)}
 .species-violet .wildflower-leaf{width:230%;height:13%}.species-violet .wildflower-head{top:-7%}
