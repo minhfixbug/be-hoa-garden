@@ -56,9 +56,6 @@
 .garden-pet.greeted img{animation:pet-greet .4s ease-in-out 2 alternate}
 .corgi{width:116px;animation:corgi-chase 12s linear infinite}
 .black-pup{width:77px;animation:pup-chase 12s linear infinite}
-.pet-note{position:fixed;z-index:30;left:50%;bottom:24px;transform:translateX(-50%);width:max-content;max-width:min(92vw,430px);display:flex;align-items:center;gap:10px;padding:12px 12px 12px 19px;background:#fffaf0f2;border:1px solid #f1dfcb;border-radius:22px;box-shadow:0 12px 30px #52664e38;color:#765b58;font-size:13px;line-height:1.45;backdrop-filter:blur(7px)}
-.pet-note[hidden]{display:none}.pet-note button{flex:none;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:#f6e6e1;color:#a95d69;cursor:pointer;font-size:23px;line-height:1}
-.pet-note button:focus-visible{outline:3px solid #b85060;outline-offset:2px}
 .walk-guide{position:absolute;z-index:7;top:22px;right:24px;padding:10px 13px;display:flex;align-items:center;gap:11px;color:#7f806e;background:#fffdf0c7;border:1px solid #fff9e4;box-shadow:0 7px 20px #7893711d;border-radius:50px;backdrop-filter:blur(8px);font-size:9px;font-weight:700;letter-spacing:.13em}
 .walk-guide span:first-child{font-size:19px;line-height:1;color:#d88691}.walk-guide b{color:#bd6876;font-size:10px;white-space:nowrap}
 .memories .section-intro{z-index:7;min-height:91svh;margin-top:-100svh;padding:13vh 22px 14vh;max-width:none;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 40% 31% at 50% 50%,#fffaf1c8 0,#fffaf18a 65%,transparent 100%)}
@@ -84,6 +81,10 @@ body.motion-ready .memories .cards .card:nth-child(3).in-view{transform:perspect
 body.motion-ready .memories .cards .card.in-view:hover{transform:translateY(-7px) rotate(0) scale(1.02)}
 body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scale(1) rotate(8deg)}
 .memories .card-body{background:#fff}.memories .picture{height:290px}.memories .card p{font-size:14px}
+.memories .picture.has-photo::before{content:"";position:absolute;inset:-18px;background-image:var(--photo-url);background-size:cover;background-position:center;filter:blur(20px) brightness(.84) saturate(.8);transform:scale(1.06)}
+.memories .picture.has-photo img{position:relative;z-index:1;object-position:center 12%}
+.memories .picture.portrait-photo{height:330px}
+.memories .picture.portrait-photo img{object-fit:contain;object-position:center}
 .flower-picker{margin-top:18px;padding-top:16px;border-top:1px dashed #eadad2}
 .memories .card .flower-picker-title{margin:0 0 11px;color:#aa6974;font-size:12px;font-weight:700;letter-spacing:.02em}
 .flower-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}

@@ -1,9 +1,7 @@
-// To add your own photos, put them in dist/photos/ and fill in the paths below.
-// Example: { src: './photos/us-at-the-beach.jpg', alt: 'Bé Hoa and me at the beach' }
 const photos = [
-  { src: '', alt: '' },
-  { src: '', alt: '' },
-  { src: '', alt: '' },
+  { src: './photos/memory-01.webp', alt: 'Bé Hoa và anh chụp ảnh cùng nhau' },
+  { src: './photos/memory-02.webp', alt: 'Bé Hoa và anh đội mũ chụp ảnh trong gương', portrait: true },
+  { src: './photos/memory-03.webp', alt: 'Bé Hoa mỉm cười, đặt hai tay bên má', portrait: true },
 ];
 
 document.querySelectorAll('[data-photo-slot]').forEach((card, index) => {
@@ -11,6 +9,8 @@ document.querySelectorAll('[data-photo-slot]').forEach((card, index) => {
   if (!photo?.src) return;
   const picture = card.querySelector('.picture');
   const image = picture.querySelector('img');
+  picture.style.setProperty('--photo-url', `url("${photo.src}")`);
+  picture.classList.toggle('portrait-photo', !!photo.portrait);
   image.onload = () => {
     image.hidden = false;
     picture.classList.add('has-photo');
@@ -245,18 +245,29 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
   finaleObserver.observe(finale);
 }
 
-const petNote = document.getElementById('pet-note');
-const petNoteText = document.getElementById('pet-note-text');
-let lastPet = null;
+// A short, softly played CC0 recording from Wikimedia Commons: File:Ladrido perro.ogg.
+const puppyBark = new Audio('./sounds/puppy-barks.mp3');
+puppyBark.preload = 'auto';
+let lastBarkAt = 0;
+
+function playPuppyBark(isCorgi) {
+  const now = Date.now();
+  if (now - lastBarkAt < 220) return;
+  lastBarkAt = now;
+  puppyBark.pause();
+  puppyBark.currentTime = 0;
+  puppyBark.playbackRate = isCorgi ? .95 : 1.2;
+  puppyBark.volume = .48;
+  void puppyBark.play().catch(() => {});
+}
+
 [
-  ['pet-corgi', 'Gâu! Anh nhờ tớ giữ lại nụ cười của Bé Hoa đấy ♡'],
-  ['pet-black', 'Bí mật nhỏ: có Bé Hoa ở đây, khu vườn mới thật sự nở hoa ✿'],
-].forEach(([id, message]) => {
+  ['pet-corgi', true],
+  ['pet-black', false],
+].forEach(([id, isCorgi]) => {
   const pet = document.getElementById(id);
   pet.addEventListener('click', () => {
-    lastPet = pet;
-    petNoteText.textContent = message;
-    petNote.hidden = false;
+    playPuppyBark(isCorgi);
     pet.classList.remove('greeted');
     void pet.offsetWidth;
     pet.classList.add('greeted');
@@ -264,15 +275,6 @@ let lastPet = null;
     burstPetals(pet, 8);
   });
 });
-document.getElementById('pet-note-close').addEventListener('click', () => {
-  petNote.hidden = true;
-  lastPet?.focus();
-});
-window.addEventListener('scroll', () => {
-  if (petNote.hidden) return;
-  const bounds = memories.getBoundingClientRect();
-  if (bounds.bottom < 0 || bounds.top > window.innerHeight) petNote.hidden = true;
-}, { passive: true });
 
 let bloomStarted = false;
 bloomButton.addEventListener('click', () => {
