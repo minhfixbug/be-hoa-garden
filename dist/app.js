@@ -33,6 +33,11 @@ const flowerField = document.getElementById('flower-field');
 const walkButterfly = document.getElementById('walk-butterfly');
 const walkCount = document.getElementById('walk-count');
 const gardenCouple = document.getElementById('garden-couple');
+const { flowerHeadSvg, gardenSpecies } = window.BeHoaBotanical;
+
+['peony', 'daisy', 'rose', 'tulip', 'sunflower'].forEach((species, index) => {
+  document.querySelectorAll('.hero-art .flower')[index].innerHTML = flowerHeadSvg(species);
+});
 
 const flowerPlaces = [
   [3, 18], [9, 49], [2, 76], [16, 25], [20, 62], [27, 12],
@@ -42,19 +47,18 @@ const flowerPlaces = [
   [45, 15], [55, 33], [41, 72], [58, 76], [48, 51], [53, 89],
   [11, 12], [32, 88], [76, 70], [91, 86], [6, 36], [97, 30],
 ];
-const flowerColors = ['#f3a2ac', '#ffe3a5', '#d7b9de', '#f7b98d', '#fff4dc'];
 const wildflowers = flowerPlaces.map(([x, y], index) => {
   const flower = document.createElement('span');
-  const size = 27 + (index * 11) % 31;
-  flower.className = 'wildflower';
+  const species = gardenSpecies[(index * 3 + Math.floor(index / 7)) % gardenSpecies.length];
+  const size = 29 + (index * 11) % 30 + (species === 'sunflower' ? 4 : 0);
+  flower.className = `wildflower species-${species}`;
   flower.style.setProperty('--x', `${x}%`);
   flower.style.setProperty('--y', `${y}%`);
   flower.style.setProperty('--size', `${size}px`);
-  flower.style.setProperty('--plant-height', `${Math.round(size * 1.75)}px`);
-  flower.style.setProperty('--petal', flowerColors[index % flowerColors.length]);
+  flower.style.setProperty('--plant-height', `${Math.round(size * (species === 'violet' ? 2.15 : 1.75))}px`);
   flower.style.setProperty('--delay', `${-(index % 7) * .37}s`);
   flower.style.setProperty('--bloom-delay', `${(index % 5) * .09}s`);
-  flower.innerHTML = '<span class="wildflower-stem"><i class="wildflower-leaf left"></i><i class="wildflower-leaf right"></i></span><span class="wildflower-head"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></span>';
+  flower.innerHTML = `<span class="wildflower-stem"><i class="wildflower-leaf left"></i><i class="wildflower-leaf right"></i></span><span class="wildflower-head">${flowerHeadSvg(species)}</span>`;
   flowerField.appendChild(flower);
   return flower;
 });
@@ -124,9 +128,12 @@ function burstPetals(element, count) {
 }
 
 const flowerTypes = [
-  { id: 'rose', name: 'Hồng phấn', color: '#eb9bab' },
-  { id: 'daisy', name: 'Cúc nắng', color: '#ffe0a1' },
-  { id: 'violet', name: 'Hoa tím', color: '#c9acdc' },
+  { id: 'rose', name: 'Hồng nhung' },
+  { id: 'daisy', name: 'Cúc họa mi' },
+  { id: 'violet', name: 'Oải hương' },
+  { id: 'peony', name: 'Mẫu đơn' },
+  { id: 'tulip', name: 'Tulip đào' },
+  { id: 'sunflower', name: 'Hướng dương' },
 ];
 const defaultFlowers = ['rose', 'daisy', 'violet'];
 const keepsakeKey = 'be-hoa-garden-keepsakes-v1';
@@ -148,7 +155,7 @@ function saveKeepsakes() {
 function updateBouquet() {
   bouquetBlooms.forEach((bloom, index) => {
     const flower = flowerTypes.find(item => item.id === (chosenFlowers[index] || defaultFlowers[index]));
-    bloom.style.setProperty('--petal', flower.color);
+    bloom.innerHTML = flowerHeadSvg(flower.id);
     bloom.dataset.type = flower.id;
   });
   const count = chosenFlowers.filter(Boolean).length;
@@ -176,10 +183,9 @@ document.querySelectorAll('.memories .card').forEach((card, index) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'flower-choice';
-    button.style.setProperty('--choice-color', flower.color);
     button.setAttribute('aria-label', `Chọn ${flower.name} cho kỷ niệm ${index + 1}`);
     button.dataset.flower = flower.id;
-    button.innerHTML = '<span class="choice-flower" aria-hidden="true">✿</span><span class="choice-label"></span>';
+    button.innerHTML = `<span class="choice-flower" aria-hidden="true">${flowerHeadSvg(flower.id)}</span><span class="choice-label"></span>`;
     button.querySelector('.choice-label').textContent = flower.name;
     button.addEventListener('click', () => {
       chosenFlowers[index] = flower.id;

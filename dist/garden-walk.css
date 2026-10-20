@@ -31,6 +31,14 @@
 .wildflower-leaf.left{left:-315%;top:36%;transform:rotate(32deg)}
 .wildflower-leaf.right{left:65%;top:62%;transform:rotate(-29deg) scaleX(-1)}
 .wildflower-head{position:absolute;z-index:1;left:0;top:0;width:var(--size);height:var(--size);animation:wildflower-sway 8s ease-in-out infinite;animation-delay:var(--delay)}
+.botanical-svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(1px 3px 2px #75596a3d)}
+.hero-art .flower .botanical-svg{filter:drop-shadow(2px 7px 5px #9c6d7342)}
+.wildflower-head .botanical-svg{width:var(--size);height:var(--size)}
+.species-violet .wildflower-leaf{width:230%;height:13%}.species-violet .wildflower-head{top:-7%}
+.species-tulip .wildflower-leaf{width:500%;height:27%;border-radius:0 100% 8% 100%}.species-tulip .wildflower-stem{width:7%}
+.species-sunflower .wildflower-stem{width:11%}.species-sunflower .wildflower-leaf{width:400%;height:26%}
+.species-cosmos .wildflower-leaf{width:260%;height:12%;border-radius:20% 90% 10% 90%}
+.species-peony .wildflower-leaf,.species-rose .wildflower-leaf{width:390%;height:24%}
 .wildflower-head i{position:absolute;left:31%;top:0;width:38%;height:57%;background:var(--petal);border-radius:50% 50% 43% 43%;transform-origin:50% 86%;box-shadow:inset -3px -3px 0 #fff9e547}
 .wildflower-head i:nth-child(1){transform:rotate(0)}.wildflower-head i:nth-child(2){transform:rotate(60deg)}.wildflower-head i:nth-child(3){transform:rotate(120deg)}.wildflower-head i:nth-child(4){transform:rotate(180deg)}.wildflower-head i:nth-child(5){transform:rotate(240deg)}.wildflower-head i:nth-child(6){transform:rotate(300deg)}
 .wildflower-head b{position:absolute;left:37%;top:37%;width:26%;height:26%;border-radius:50%;background:#f3c86f;border:2px solid #e9b560}
@@ -77,12 +85,12 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
 .memories .card-body{background:#fff}.memories .picture{height:290px}.memories .card p{font-size:14px}
 .flower-picker{margin-top:18px;padding-top:16px;border-top:1px dashed #eadad2}
 .memories .card .flower-picker-title{margin:0 0 11px;color:#aa6974;font-size:12px;font-weight:700;letter-spacing:.02em}
-.flower-choices{display:flex;gap:7px;flex-wrap:wrap}
-.flower-choice{flex:1 1 78px;min-width:0;min-height:48px;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 5px;border:1px solid #ecd9d4;border-radius:14px;background:#fff9f5;color:#7f716b;cursor:pointer;font-size:10px;font-weight:700;line-height:1.2;transition:transform .2s,box-shadow .2s,border-color .2s,background .2s}
+.flower-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.flower-choice{min-width:0;min-height:71px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 4px;border:1px solid #ecd9d4;border-radius:14px;background:#fff9f5;color:#7f716b;cursor:pointer;font-size:10px;font-weight:700;line-height:1.2;transition:transform .2s,box-shadow .2s,border-color .2s,background .2s}
 .flower-choice:hover{transform:translateY(-2px);box-shadow:0 5px 13px #ad777d24}
 .flower-choice.selected{background:#fff1ec;border-color:#d795a0;box-shadow:0 0 0 2px #eeb8c04d}
 .flower-choice:focus-visible{outline:3px solid #b85060;outline-offset:2px}
-.choice-flower{color:var(--choice-color);font-size:24px;line-height:1;text-shadow:0 2px 0 #ba77772e}
+.choice-flower{display:block;width:34px;height:34px;flex:none}.choice-flower .botanical-svg{filter:drop-shadow(0 2px 1px #a6857130)}
 .memories .card .flower-choice-status{min-height:18px;margin:9px 0 0;color:#9c8580;font-size:10px;line-height:1.5}
 .memories .memory-note{position:relative;z-index:7;min-height:54svh;margin:0;padding:12vh 20px 16vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,transparent 0,#fffaf1b8 70%,#fffaf5 100%);color:#7e806e;font-size:21px;text-shadow:0 1px #fff}
 /* The three keepsakes gather into a bouquet before the letter. */
@@ -103,6 +111,8 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
 .keepsake-stem i{position:absolute;top:51%;left:-30px;width:37px;height:18px;border-radius:90% 0 90% 0;background:#90ae7f;transform:rotate(28deg)}
 .keepsake-stem.stem-one{height:305px;transform:rotate(-18deg)}.keepsake-stem.stem-two{height:337px;transform:rotate(0)}.keepsake-stem.stem-three{height:270px;transform:rotate(20deg)}
 .keepsake-flower{position:absolute;z-index:3;width:130px;height:130px;transform-origin:50% 75%;transition:transform .9s cubic-bezier(.17,1.3,.3,1),opacity .5s}
+.keepsake-flower .botanical-svg{width:100%;height:100%;filter:drop-shadow(2px 6px 4px #8b67733a)}
+.keepsake-flower[data-type="violet"] .botanical-svg{transform:scale(1.12)}
 .keepsake-flower.bloom-one{left:26px;top:73px;--flight-x:-260px;--flight-y:100px;transition-delay:.1s}
 .keepsake-flower.bloom-two{left:130px;top:25px;--flight-x:0px;--flight-y:-220px;transition-delay:.35s}
 .keepsake-flower.bloom-three{left:232px;top:91px;--flight-x:260px;--flight-y:80px;transition-delay:.6s}
@@ -175,5 +185,5 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
 }
 @media(max-width:480px){.walk-guide span:nth-child(2){letter-spacing:.05em}.garden-land{inset:-25% -9%;transform:perspective(850px) rotateX(40deg) scale(1.17);transform-origin:50% 54%}.garden-pond{top:12%;right:-12%;width:130px;height:105px}.garden-tree{filter:saturate(.93)}.wildflower{--bloom-scale:.8}.garden-couple{width:118px}.corgi{width:88px}.black-pup{width:59px}.memories .section-intro h2{font-size:40px}.memories .cards .card,.memories .cards .card:nth-child(2),.memories .cards .card:nth-child(3){margin-top:34vh;margin-bottom:40vh}.memories .cards .card::after{right:2px}.memories .cards .card:nth-child(2)::after{left:2px}}
 @media(max-width:480px){.corgi{animation-name:corgi-chase-mobile}.black-pup{animation-name:pup-chase-mobile}}
-@media(max-width:480px){.flower-choice{flex-basis:78px;min-height:58px;flex-direction:column;gap:1px}.flower-choice .choice-label{font-size:10px}.garden-finale{padding:74px 16px 74px}.finale-copy h2{font-size:42px}.finale-copy p{font-size:13px}.finale-stage{height:380px;margin-top:22px}.keepsake-bouquet{transform:translateX(-50%) scale(.72)}.finale-couple{width:78px;right:-3%;bottom:12px}.corgi-finale{width:69px;left:-4%;bottom:11px}.black-finale{width:45px;left:13%;bottom:14px}.bouquet-caption{font-size:17px;margin-top:0}.wish-card{padding:22px 18px 18px}.wish-card label{font-size:20px}.wish-card form{flex-direction:column}.wish-card input{flex:none;min-height:48px;width:100%}.wish-card form button{width:100%}.wish-star{right:8%;top:22%;font-size:53px}.pet-note{bottom:18px;font-size:12px}}
+@media(max-width:480px){.flower-choice{min-height:68px;gap:1px}.flower-choice .choice-label{font-size:10px}.choice-flower{width:30px;height:30px}.garden-finale{padding:74px 16px 74px}.finale-copy h2{font-size:42px}.finale-copy p{font-size:13px}.finale-stage{height:380px;margin-top:22px}.keepsake-bouquet{transform:translateX(-50%) scale(.72)}.finale-couple{width:78px;right:-3%;bottom:12px}.corgi-finale{width:69px;left:-4%;bottom:11px}.black-finale{width:45px;left:13%;bottom:14px}.bouquet-caption{font-size:17px;margin-top:0}.wish-card{padding:22px 18px 18px}.wish-card label{font-size:20px}.wish-card form{flex-direction:column}.wish-card input{flex:none;min-height:48px;width:100%}.wish-card form button{width:100%}.wish-star{right:8%;top:22%;font-size:53px}.pet-note{bottom:18px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.wildflower-head,.walk-butterfly,.walk-instruction span,.garden-pet,.garden-pet img,.garden-tree,.garden-land::after,.garden-pond::before,.wildflower.awake::after,.garden-couple.walking img{animation:none}.wildflower,.garden-couple{transition:none}.corgi{left:65%;top:70%;transform:translate(-50%,-50%)}.black-pup{left:45%;top:75%;transform:translate(-50%,-50%)}body.motion-ready .memories .cards .card{opacity:1;transform:none}body.motion-ready .memories .cards .card .picture{clip-path:none}}
