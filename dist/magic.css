@@ -25,7 +25,12 @@ body.garden-awake .hero::before{opacity:1}
 .garden-floor i{position:absolute;bottom:23px;width:30px;height:12px;background:#789978;border-radius:100% 0;opacity:.75;transform:rotate(-30deg)}
 .garden-floor i:nth-child(1){left:7%}.garden-floor i:nth-child(2){left:18%;bottom:44px;transform:rotate(27deg)}.garden-floor i:nth-child(3){right:13%;bottom:42px}.garden-floor i:nth-child(4){right:25%;transform:rotate(32deg)}.garden-floor i:nth-child(5){left:42%;bottom:15px}
 .bouquet{z-index:2}
-.stem-a{--stem-angle:-22deg}.stem-b{--stem-angle:14deg}.stem-c{--stem-angle:-4deg}.stem-d{--stem-angle:32deg}.stem-e{--stem-angle:-39deg}
+/* Each tip lands inside the lower centre of its painted bloom; all stems gather beneath the wrap. */
+.stem-a{--stem-angle:-22deg;left:calc(50% - 4px);height:264px}
+.stem-b{--stem-angle:6deg;left:calc(50% - 4px);height:274px}
+.stem-c{--stem-angle:-1deg;left:calc(50% - 4px);height:158px}
+.stem-d{--stem-angle:35deg;left:calc(50% - 4px);height:203px}
+.stem-e{--stem-angle:-49deg;left:calc(50% - 4px);height:183px}
 .stem{transform:rotate(var(--stem-angle)) scaleY(.05);transition:transform 1.05s cubic-bezier(.2,.75,.23,1);transform-origin:bottom center}
 .bloomed .stem{transform:rotate(var(--stem-angle)) scaleY(1)}
 .stem-a{transition-delay:.12s}.stem-b{transition-delay:.24s}.stem-c{transition-delay:.34s}.stem-d{transition-delay:.42s}.stem-e{transition-delay:.52s}
