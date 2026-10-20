@@ -32,6 +32,7 @@ const memories = document.getElementById('memories');
 const flowerField = document.getElementById('flower-field');
 const walkButterfly = document.getElementById('walk-butterfly');
 const walkCount = document.getElementById('walk-count');
+const gardenCouple = document.getElementById('garden-couple');
 
 const flowerPlaces = [
   [3, 18], [9, 49], [2, 76], [16, 25], [20, 62], [27, 12],
@@ -71,6 +72,11 @@ function updateWalk() {
   memories.style.setProperty('--hill-shift', `${progress * 18}px`);
   memories.style.setProperty('--butterfly-x', `${50 + Math.sin(progress * 9) * 11}%`);
   memories.style.setProperty('--butterfly-y', `${22 + progress * 58}%`);
+  memories.style.setProperty('--couple-x', `${58 + progress * 20}%`);
+  const cardClearance = Math.max(0, Math.min(1, (progress - .04) / .12, (1 - progress) / .17)) * 8;
+  memories.style.setProperty('--couple-y', `${60 + progress * 28 + cardClearance}%`);
+  memories.style.setProperty('--couple-scale', `${(.58 + progress * .5).toFixed(3)}`);
+  memories.style.setProperty('--couple-opacity', `${Math.min(1, entrance * 3)}`);
   walkCount.textContent = `${String(Math.min(3, Math.floor(progress * 3) + 1)).padStart(2, '0')} / 03`;
 }
 
@@ -171,7 +177,13 @@ function updateProgress() {
   updateWalk();
   progressPending = false;
 }
+let coupleStepTimer;
 window.addEventListener('scroll', () => {
+  if (!reducedMotion.matches) {
+    gardenCouple.classList.add('walking');
+    window.clearTimeout(coupleStepTimer);
+    coupleStepTimer = window.setTimeout(() => gardenCouple.classList.remove('walking'), 200);
+  }
   if (progressPending) return;
   progressPending = true;
   requestAnimationFrame(updateProgress);

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165 125" role="img" aria-label="Chó cỏ đen nhỏ, dáng thanh và chân dài">
+  <style>
+    .leg-a,.leg-c{animation:trot-a .32s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 8%}
+    .leg-b,.leg-d{animation:trot-b .32s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 8%}
+    .tail{animation:wag .32s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:100% 50%}
+    @keyframes trot-a{50%{transform:rotate(23deg) translateY(-3px)}}
+    @keyframes trot-b{50%{transform:rotate(-23deg) translateY(-3px)}}
+    @keyframes wag{to{transform:rotate(19deg)}}
+    @media(prefers-reduced-motion:reduce){.leg-a,.leg-b,.leg-c,.leg-d,.tail{animation:none}}
+  </style>
+  <ellipse cx="82" cy="117" rx="67" ry="6" fill="#2e4c39" opacity=".19"/>
+  <path class="tail" d="M32 55C13 53 7 34 16 23C17 37 25 40 35 42Z" fill="#313841" stroke="#18242b" stroke-width="2.7" stroke-linejoin="round"/>
+  <g fill="#252d35" stroke="#172129" stroke-width="2.7" stroke-linejoin="round">
+    <path class="leg-a" d="M48 72L43 106Q44 112 51 113L62 111L61 106L55 104L60 74Z"/>
+    <path class="leg-b" d="M73 73L72 106Q75 111 82 111L91 109L90 104L83 103L83 74Z"/>
+    <path class="leg-c" d="M104 72L110 106Q112 112 119 111L128 108L126 104L119 103L116 70Z"/>
+    <path class="leg-d" d="M123 67L132 102Q135 107 142 105L149 102L146 98L139 98L136 64Z"/>
+  </g>
+  <path d="M29 53C33 38 48 35 67 37L103 39C118 40 131 48 134 60C135 71 123 79 107 79L55 77C36 76 26 67 29 53Z" fill="#303944" stroke="#18232c" stroke-width="3"/>
+  <path d="M49 44C63 39 91 43 105 50C92 57 68 59 46 53Z" fill="#60656b" opacity=".45"/>
+  <path d="M106 40C111 29 122 25 133 29C146 34 150 45 146 58C142 70 130 74 117 69C107 66 101 52 106 40Z" fill="#303943" stroke="#18232c" stroke-width="3"/>
+  <path d="M111 33C109 16 112 8 118 5C126 14 130 22 130 30M132 31C143 15 151 16 155 21C153 31 149 37 144 42" fill="#2b333d" stroke="#18232c" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M121 66C129 67 134 64 139 60L136 75Q130 83 121 75Z" fill="#ede8dd"/>
+  <path d="M138 48C149 43 160 48 162 55C164 62 154 66 143 61Z" fill="#505962" stroke="#18232c" stroke-width="2.1"/>
+  <circle cx="121" cy="44" r="3" fill="#f5eddf"/><circle cx="138" cy="43" r="3" fill="#f5eddf"/>
+  <circle cx="122" cy="44" r="1.5" fill="#172029"/><circle cx="139" cy="43" r="1.5" fill="#172029"/>
+  <ellipse cx="160" cy="53" rx="3.4" ry="2.7" fill="#171d24"/>
+  <path d="M149 60Q155 65 160 59" fill="none" stroke="#171d24" stroke-width="2" stroke-linecap="round"/>
+  <path d="M151 62Q153 71 159 66L158 61Z" fill="#e88591"/>
+</svg>

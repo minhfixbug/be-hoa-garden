@@ -36,6 +36,9 @@
 .wildflower-head b{position:absolute;left:37%;top:37%;width:26%;height:26%;border-radius:50%;background:#f3c86f;border:2px solid #e9b560}
 .walk-butterfly{position:absolute;z-index:6;left:var(--butterfly-x,50%);top:var(--butterfly-y,25%);font-size:34px;line-height:1;filter:drop-shadow(0 7px 7px #676a7252);transform:translate(-50%,-50%);transition:left .18s linear,top .18s linear;animation:butterfly-flutter 2.1s ease-in-out infinite;pointer-events:none}
 .walk-butterfly svg{display:block;width:48px;height:48px}
+.garden-couple{position:absolute;z-index:5;left:var(--couple-x,58%);top:var(--couple-y,60%);width:clamp(118px,13vw,188px);opacity:var(--couple-opacity,0);transform:translate(-50%,-100%);pointer-events:none;transition:left .16s linear,top .16s linear,opacity .25s ease}
+.garden-couple img{display:block;width:100%;height:auto;transform:scale(var(--couple-scale,.58));transform-origin:50% 100%;filter:drop-shadow(5px 9px 5px #3c4b3c52)}
+.garden-couple.walking img{animation:couple-step .34s ease-in-out infinite alternate}
 .garden-pet{position:absolute;z-index:6;display:block;pointer-events:none;filter:drop-shadow(4px 8px 4px #35544352)}
 .garden-pet img{display:block;width:100%;height:auto;animation:pet-hop .34s ease-in-out infinite alternate}
 .corgi{width:116px;animation:corgi-chase 12s linear infinite}
@@ -71,6 +74,7 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
 @keyframes tree-breeze{to{rotate:2deg}}
 @keyframes garden-glimmer{to{opacity:.8;translate:0 -7px}}
 @keyframes pet-hop{to{translate:0 -5px}}
+@keyframes couple-step{to{translate:0 -6px}}
 @keyframes corgi-chase{0%,100%{left:23%;top:72%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:72%;top:42%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:72%;top:42%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:23%;top:72%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
 @keyframes pup-chase{0%,100%{left:12%;top:87%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:61%;top:58%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:61%;top:58%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:12%;top:87%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
 @keyframes corgi-chase-mobile{0%,100%{left:23%;top:64%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:72%;top:34%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:72%;top:34%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:23%;top:64%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
@@ -101,6 +105,6 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
   .memories .picture{height:260px}
   .memories .memory-note{font-size:17px;min-height:46svh;text-align:center}
 }
-@media(max-width:480px){.walk-guide span:nth-child(2){letter-spacing:.05em}.garden-land{inset:-25% -9%;transform:perspective(850px) rotateX(40deg) scale(1.17);transform-origin:50% 54%}.garden-pond{top:12%;right:-12%;width:130px;height:105px}.garden-tree{filter:saturate(.93)}.wildflower{--bloom-scale:.8}.corgi{width:88px}.black-pup{width:59px}.memories .section-intro h2{font-size:40px}.memories .cards .card,.memories .cards .card:nth-child(2),.memories .cards .card:nth-child(3){margin-top:34vh;margin-bottom:40vh}.memories .cards .card::after{right:2px}.memories .cards .card:nth-child(2)::after{left:2px}}
+@media(max-width:480px){.walk-guide span:nth-child(2){letter-spacing:.05em}.garden-land{inset:-25% -9%;transform:perspective(850px) rotateX(40deg) scale(1.17);transform-origin:50% 54%}.garden-pond{top:12%;right:-12%;width:130px;height:105px}.garden-tree{filter:saturate(.93)}.wildflower{--bloom-scale:.8}.garden-couple{width:118px}.corgi{width:88px}.black-pup{width:59px}.memories .section-intro h2{font-size:40px}.memories .cards .card,.memories .cards .card:nth-child(2),.memories .cards .card:nth-child(3){margin-top:34vh;margin-bottom:40vh}.memories .cards .card::after{right:2px}.memories .cards .card:nth-child(2)::after{left:2px}}
 @media(max-width:480px){.corgi{animation-name:corgi-chase-mobile}.black-pup{animation-name:pup-chase-mobile}}
-@media(prefers-reduced-motion:reduce){.wildflower-head,.walk-butterfly,.walk-instruction span,.garden-pet,.garden-pet img,.garden-tree,.garden-land::after,.garden-pond::before,.wildflower.awake::after{animation:none}.wildflower{transition:none}.corgi{left:65%;top:70%;transform:translate(-50%,-50%)}.black-pup{left:45%;top:75%;transform:translate(-50%,-50%)}body.motion-ready .memories .cards .card{opacity:1;transform:none}body.motion-ready .memories .cards .card .picture{clip-path:none}}
+@media(prefers-reduced-motion:reduce){.wildflower-head,.walk-butterfly,.walk-instruction span,.garden-pet,.garden-pet img,.garden-tree,.garden-land::after,.garden-pond::before,.wildflower.awake::after,.garden-couple.walking img{animation:none}.wildflower,.garden-couple{transition:none}.corgi{left:65%;top:70%;transform:translate(-50%,-50%)}.black-pup{left:45%;top:75%;transform:translate(-50%,-50%)}body.motion-ready .memories .cards .card{opacity:1;transform:none}body.motion-ready .memories .cards .card .picture{clip-path:none}}
