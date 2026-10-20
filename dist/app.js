@@ -27,6 +27,10 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const bloomButton = document.getElementById('bloom-button');
 const garden = document.getElementById('garden');
 const petalLayer = document.getElementById('petal-layer');
+const nextChapter = document.getElementById('next-chapter');
+const memories = document.getElementById('memories');
+
+const motionBehavior = () => reducedMotion.matches ? 'auto' : 'smooth';
 
 function scatterPetals(count) {
   if (reducedMotion.matches) return;
@@ -44,23 +48,106 @@ function scatterPetals(count) {
   }
 }
 
+function burstPetals(element, count) {
+  if (reducedMotion.matches) return;
+  const bounds = element.getBoundingClientRect();
+  const x = bounds.left + bounds.width / 2;
+  const y = bounds.top + bounds.height / 2;
+  for (let i = 0; i < count; i += 1) {
+    const angle = (Math.PI * 2 * i) / count + Math.random() * .3;
+    const distance = 75 + Math.random() * 130;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+    const petal = document.createElement('span');
+    petal.className = 'burst-petal';
+    petal.style.setProperty('--x', `${x}px`);
+    petal.style.setProperty('--y', `${y}px`);
+    petal.style.setProperty('--dx', `${dx}px`);
+    petal.style.setProperty('--dy', `${dy}px`);
+    petal.style.setProperty('--dx-end', `${dx * 1.25}px`);
+    petal.style.setProperty('--dy-end', `${dy + 145}px`);
+    petal.style.setProperty('--petal-color', ['#f2a5ae', '#f7c59f', '#e2cae7', '#ffe4b5'][i % 4]);
+    petal.style.animationDelay = `${Math.random() * .18}s`;
+    petal.addEventListener('animationend', () => petal.remove(), { once: true });
+    petalLayer.appendChild(petal);
+  }
+}
+
+let bloomStarted = false;
 bloomButton.addEventListener('click', () => {
-  if (!garden.classList.contains('bloomed')) {
+  if (bloomStarted) {
+    memories.scrollIntoView({ behavior: motionBehavior() });
+    return;
+  }
+  bloomStarted = true;
+  garden.scrollIntoView({ behavior: motionBehavior(), block: 'center' });
+  const travelTime = reducedMotion.matches ? 0 : window.innerWidth <= 900 ? 500 : 170;
+  window.setTimeout(() => {
+    document.body.classList.add('garden-awake');
     garden.classList.add('bloomed');
     bloomButton.setAttribute('aria-expanded', 'true');
-    bloomButton.innerHTML = 'Hoa nở rồi, Bé Hoa ơi <span aria-hidden="true">♥</span>';
-  }
-  scatterPetals(23);
-  window.setTimeout(() => document.getElementById('memories').scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth' }), 1250);
+    bloomButton.innerHTML = 'Khu vườn đã nở <span aria-hidden="true">♥</span>';
+    window.setTimeout(() => burstPetals(garden.querySelector('.bouquet'), 34), reducedMotion.matches ? 0 : 1350);
+    window.setTimeout(() => scatterPetals(19), reducedMotion.matches ? 0 : 1550);
+    window.setTimeout(() => {
+      nextChapter.hidden = false;
+      requestAnimationFrame(() => nextChapter.classList.add('ready'));
+    }, reducedMotion.matches ? 0 : 2300);
+  }, travelTime);
 });
+
+nextChapter.addEventListener('click', () => memories.scrollIntoView({ behavior: motionBehavior() }));
+
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  document.body.classList.add('motion-ready');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: .15, rootMargin: '0px 0px -5% 0px' });
+  document.querySelectorAll('.section-intro, .card, .chapter-bridge, .letter-section').forEach(element => revealObserver.observe(element));
+} else {
+  document.querySelector('.chapter-bridge').classList.add('in-view');
+}
+
+let progressPending = false;
+function updateProgress() {
+  const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  document.documentElement.style.setProperty('--progress', Math.min(1, window.scrollY / maxScroll));
+  progressPending = false;
+}
+window.addEventListener('scroll', () => {
+  if (progressPending) return;
+  progressPending = true;
+  requestAnimationFrame(updateProgress);
+}, { passive: true });
+updateProgress();
+
+if (!reducedMotion.matches && window.matchMedia('(pointer: fine)').matches) {
+  garden.addEventListener('pointermove', event => {
+    const bounds = garden.getBoundingClientRect();
+    garden.style.setProperty('--px', `${((event.clientX - bounds.left) / bounds.width - .5) * 18}px`);
+    garden.style.setProperty('--py', `${((event.clientY - bounds.top) / bounds.height - .5) * 14}px`);
+  });
+  garden.addEventListener('pointerleave', () => {
+    garden.style.setProperty('--px', '0px');
+    garden.style.setProperty('--py', '0px');
+  });
+}
 
 const letterButton = document.getElementById('letter-button');
 const envelope = document.getElementById('envelope');
 const paper = document.getElementById('letter-paper');
 letterButton.addEventListener('click', () => {
   const open = envelope.classList.toggle('open');
+  document.querySelector('.letter-section').classList.toggle('letter-awake', open);
   letterButton.setAttribute('aria-expanded', String(open));
   paper.setAttribute('aria-hidden', String(!open));
   letterButton.innerHTML = open ? 'Gấp lá thư lại <span aria-hidden="true">↗</span>' : 'Mở lá thư này <span aria-hidden="true">↗</span>';
-  if (open) scatterPetals(15);
+  if (open) {
+    burstPetals(envelope, 24);
+    scatterPetals(12);
+  }
 });
