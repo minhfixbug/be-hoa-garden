@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 96" role="img" aria-label="Bé Corgi chạy chơi">
+  <style>
+    .leg-a,.leg-c{animation:trot-a .38s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 12%}
+    .leg-b,.leg-d{animation:trot-b .38s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 12%}
+    .tail{animation:wag .35s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:100% 50%}
+    @keyframes trot-a{50%{transform:rotate(19deg) translateY(-2px)}}
+    @keyframes trot-b{50%{transform:rotate(-19deg) translateY(-2px)}}
+    @keyframes wag{to{transform:rotate(24deg)}}
+    @media(prefers-reduced-motion:reduce){.leg-a,.leg-b,.leg-c,.leg-d,.tail{animation:none}}
+  </style>
+  <ellipse cx="67" cy="83" rx="54" ry="8" fill="#375a3c" opacity=".18"/>
+  <path class="tail" d="M29 51C15 42 9 46 12 57C16 67 24 66 34 59Z" fill="#e59a55" stroke="#a66740" stroke-width="2"/>
+  <g fill="#d88248" stroke="#9c5c37" stroke-width="2">
+    <path class="leg-a" d="M42 61C39 70 40 78 44 81L53 80L56 63Z"/>
+    <path class="leg-b" d="M61 65C58 72 59 80 63 82L71 80L73 64Z"/>
+    <path class="leg-c" d="M82 61C82 72 83 79 88 81L97 79L98 61Z"/>
+    <path class="leg-d" d="M98 59C98 69 101 78 105 79L112 76L110 59Z"/>
+  </g>
+  <ellipse cx="69" cy="53" rx="47" ry="28" fill="#eaa560" stroke="#ad7148" stroke-width="2.3"/>
+  <path d="M37 40C51 31 72 31 85 40C83 50 78 57 66 61C50 60 41 52 37 40Z" fill="#fff1d9"/>
+  <path d="M85 31C91 17 96 10 103 8L108 28M105 29C116 13 121 9 128 10L123 38" fill="#e49753" stroke="#ad7148" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M100 14L105 28L94 27ZM120 15L119 32L109 28Z" fill="#f6b5ab"/>
+  <ellipse cx="101" cy="42" rx="25" ry="23" fill="#e9a05d" stroke="#ad7148" stroke-width="2.3"/>
+  <path d="M88 38C91 31 96 27 101 27C106 27 111 33 114 40L111 53C106 59 95 59 88 52Z" fill="#fff2de"/>
+  <ellipse cx="115" cy="51" rx="14" ry="10" fill="#fff7e9"/>
+  <circle cx="94" cy="38" r="2.5" fill="#503d3a"/><circle cx="110" cy="38" r="2.5" fill="#503d3a"/>
+  <ellipse cx="123" cy="48" rx="4" ry="3" fill="#473b3d"/>
+  <path d="M113 53Q117 59 122 54" fill="none" stroke="#7c5148" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M116 56Q118 65 123 59L121 55Z" fill="#ee8994"/>
+  <ellipse cx="89" cy="46" rx="4" ry="2" fill="#eb8f87" opacity=".55"/>
+</svg>

@@ -51,6 +51,7 @@ const wildflowers = flowerPlaces.map(([x, y], index) => {
   flower.style.setProperty('--size', `${size}px`);
   flower.style.setProperty('--petal', flowerColors[index % flowerColors.length]);
   flower.style.setProperty('--delay', `${-(index % 7) * .37}s`);
+  flower.style.setProperty('--bloom-delay', `${(index % 5) * .09}s`);
   flower.innerHTML = '<span class="wildflower-head"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></span>';
   flowerField.appendChild(flower);
   return flower;
@@ -60,7 +61,8 @@ function updateWalk() {
   const bounds = memories.getBoundingClientRect();
   const travel = Math.max(1, memories.offsetHeight - window.innerHeight);
   const progress = Math.max(0, Math.min(1, -bounds.top / travel));
-  const openFlowers = Math.floor(10 + progress * (wildflowers.length - 10));
+  const entrance = Math.max(0, Math.min(1, (window.innerHeight - bounds.top) / (window.innerHeight * 1.35)));
+  const openFlowers = Math.min(wildflowers.length, Math.floor(entrance * 12 + progress * (wildflowers.length - 12)));
   wildflowers.forEach((flower, index) => {
     if (index < openFlowers) flower.classList.add('awake');
   });
