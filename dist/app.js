@@ -29,6 +29,48 @@ const garden = document.getElementById('garden');
 const petalLayer = document.getElementById('petal-layer');
 const nextChapter = document.getElementById('next-chapter');
 const memories = document.getElementById('memories');
+const flowerField = document.getElementById('flower-field');
+const walkButterfly = document.getElementById('walk-butterfly');
+const walkCount = document.getElementById('walk-count');
+
+const flowerPlaces = [
+  [3, 18], [9, 49], [2, 76], [16, 25], [20, 62], [27, 12],
+  [30, 78], [34, 43], [8, 69], [14, 83], [24, 39], [35, 69],
+  [64, 15], [72, 54], [78, 28], [86, 69], [94, 16], [97, 51],
+  [69, 81], [82, 83], [89, 39], [74, 11], [99, 74], [66, 59],
+  [45, 15], [55, 33], [41, 72], [58, 76], [48, 51], [53, 89],
+  [11, 12], [32, 88], [76, 70], [91, 86], [6, 36], [97, 30],
+];
+const flowerColors = ['#f3a2ac', '#ffe3a5', '#d7b9de', '#f7b98d', '#fff4dc'];
+const wildflowers = flowerPlaces.map(([x, y], index) => {
+  const flower = document.createElement('span');
+  const size = 27 + (index * 11) % 31;
+  flower.className = 'wildflower';
+  flower.style.setProperty('--x', `${x}%`);
+  flower.style.setProperty('--y', `${y}%`);
+  flower.style.setProperty('--size', `${size}px`);
+  flower.style.setProperty('--stem-height', `${Math.round(size * 1.3)}px`);
+  flower.style.setProperty('--petal', flowerColors[index % flowerColors.length]);
+  flower.style.setProperty('--delay', `${-(index % 7) * .37}s`);
+  flower.innerHTML = '<span class="wildflower-leaf"></span><span class="wildflower-leaf right"></span><span class="wildflower-head"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></span>';
+  flowerField.appendChild(flower);
+  return flower;
+});
+
+function updateWalk() {
+  const bounds = memories.getBoundingClientRect();
+  const travel = Math.max(1, memories.offsetHeight - window.innerHeight);
+  const progress = Math.max(0, Math.min(1, -bounds.top / travel));
+  const openFlowers = Math.floor(10 + progress * (wildflowers.length - 10));
+  wildflowers.forEach((flower, index) => {
+    if (index < openFlowers) flower.classList.add('awake');
+  });
+  memories.style.setProperty('--world-shift', `${progress * 38}px`);
+  memories.style.setProperty('--hill-shift', `${progress * 18}px`);
+  memories.style.setProperty('--butterfly-x', `${50 + Math.sin(progress * 9) * 11}%`);
+  memories.style.setProperty('--butterfly-y', `${22 + progress * 58}%`);
+  walkCount.textContent = `${String(Math.min(3, Math.floor(progress * 3) + 1)).padStart(2, '0')} / 03`;
+}
 
 const motionBehavior = () => reducedMotion.matches ? 'auto' : 'smooth';
 
@@ -107,7 +149,15 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
       observer.unobserve(entry.target);
     });
   }, { threshold: .15, rootMargin: '0px 0px -5% 0px' });
-  document.querySelectorAll('.section-intro, .card, .chapter-bridge, .letter-section').forEach(element => revealObserver.observe(element));
+  document.querySelectorAll('.section-intro, .chapter-bridge, .letter-section').forEach(element => revealObserver.observe(element));
+  const cardObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: .4, rootMargin: '0px 0px -4% 0px' });
+  document.querySelectorAll('.memories .card').forEach(card => cardObserver.observe(card));
 } else {
   document.querySelector('.chapter-bridge').classList.add('in-view');
 }
@@ -116,6 +166,7 @@ let progressPending = false;
 function updateProgress() {
   const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   document.documentElement.style.setProperty('--progress', Math.min(1, window.scrollY / maxScroll));
+  updateWalk();
   progressPending = false;
 }
 window.addEventListener('scroll', () => {
@@ -124,6 +175,7 @@ window.addEventListener('scroll', () => {
   requestAnimationFrame(updateProgress);
 }, { passive: true });
 updateProgress();
+window.addEventListener('resize', updateProgress, { passive: true });
 
 if (!reducedMotion.matches && window.matchMedia('(pointer: fine)').matches) {
   garden.addEventListener('pointermove', event => {
