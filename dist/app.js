@@ -49,10 +49,9 @@ const wildflowers = flowerPlaces.map(([x, y], index) => {
   flower.style.setProperty('--x', `${x}%`);
   flower.style.setProperty('--y', `${y}%`);
   flower.style.setProperty('--size', `${size}px`);
-  flower.style.setProperty('--stem-height', `${Math.round(size * 1.3)}px`);
   flower.style.setProperty('--petal', flowerColors[index % flowerColors.length]);
   flower.style.setProperty('--delay', `${-(index % 7) * .37}s`);
-  flower.innerHTML = '<span class="wildflower-leaf"></span><span class="wildflower-leaf right"></span><span class="wildflower-head"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></span>';
+  flower.innerHTML = '<span class="wildflower-head"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></span>';
   flowerField.appendChild(flower);
   return flower;
 });
