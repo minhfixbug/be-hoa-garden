@@ -6,6 +6,7 @@
 .walk-world::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 110px #385d3b43;z-index:8;pointer-events:none}
 .garden-land{position:absolute;inset:-22% -6%;z-index:1;transform:perspective(1000px) rotateX(42deg) scale(1.18);transform-origin:50% 54%;pointer-events:none}
 .garden-land::after{content:"";position:absolute;inset:0;z-index:5;background:radial-gradient(circle at 12% 24%,#fff9d8 0 2px,transparent 3px),radial-gradient(circle at 72% 29%,#fff9d8 0 2px,transparent 3px),radial-gradient(circle at 34% 77%,#fff9d8 0 2px,transparent 3px),radial-gradient(circle at 86% 72%,#fff9d8 0 2px,transparent 3px);opacity:.15;animation:garden-glimmer 4.5s ease-in-out infinite alternate}
+.garden-life{position:absolute;inset:0;z-index:2;pointer-events:none}
 .garden-bed{position:absolute;z-index:1;border:10px solid #8aab78;background:radial-gradient(circle at 40% 35%,#b6d79b,#8fb67b 75%);box-shadow:inset 0 0 30px #416d4a27,0 14px 25px #45694a25;border-radius:56% 44% 62% 38%/48% 59% 41% 52%;transition:translate .2s linear;translate:0 var(--hill-shift,0px)}
 .bed-a{left:-12%;top:4%;width:44%;height:47%;rotate:-18deg}.bed-b{right:-13%;top:38%;width:47%;height:48%;rotate:23deg}.bed-c{left:-11%;bottom:-18%;width:52%;height:41%;rotate:12deg}
 .garden-pond{position:absolute;z-index:2;right:7%;top:9%;width:clamp(165px,21vw,300px);height:clamp(130px,17vw,240px);border:13px solid #d7cba4;border-radius:54% 46% 51% 49%/46% 56% 44% 54%;background:radial-gradient(circle at 33% 28%,#dcf5e8,#8bc5bf 67%,#6daaa7 100%);box-shadow:inset 0 0 0 6px #e9e2c3a8,inset 0 13px 18px #5a999344,0 17px 27px #47735c3b;rotate:13deg;transition:translate .2s linear;translate:0 var(--world-shift,0px)}
@@ -20,12 +21,16 @@
 .walk-path .path-middle{stroke:#ead9b6;stroke-width:186}
 .walk-path .path-pebbles{stroke:#bfa981;stroke-width:5;stroke-dasharray:1 24;opacity:.52}
 .flower-field{position:absolute;inset:0;z-index:4;pointer-events:none}
-.wildflower{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);opacity:0;scale:.02;transform-origin:center;transition:opacity .28s var(--bloom-delay,0s),scale .85s cubic-bezier(.17,1.55,.35,1) var(--bloom-delay,0s);filter:drop-shadow(3px 6px 3px #31583a52)}
+.wildflower{position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--plant-height);translate:-50% -94%;opacity:0;scale:.02;transform-origin:50% 100%;transition:opacity .28s var(--bloom-delay,0s),scale .85s cubic-bezier(.17,1.55,.35,1) var(--bloom-delay,0s);filter:drop-shadow(3px 6px 3px #31583a52)}
 .wildflower.awake{opacity:1;scale:var(--bloom-scale,1)}
-.wildflower::before{content:"";position:absolute;inset:-16%;border-radius:50%;background:repeating-conic-gradient(from 0deg,#5d9068 0deg 18deg,transparent 18deg 45deg);opacity:.9}
-.wildflower::after{content:"";position:absolute;inset:-42%;border:2px solid #fff9d9ad;border-radius:50%;opacity:0;scale:.35}
+.wildflower::before{content:"";position:absolute;left:8%;bottom:-3%;width:84%;height:13%;border-radius:50%;background:#335d4040;filter:blur(3px)}
+.wildflower::after{content:"";position:absolute;left:-12%;top:-7%;width:120%;height:65%;border:2px solid #fff9d9ad;border-radius:50%;opacity:0;scale:.35}
 .wildflower.awake::after{animation:bloom-ring .9s ease-out var(--bloom-delay,0s) both}
-.wildflower-head{position:absolute;z-index:1;inset:0;width:var(--size);height:var(--size);animation:wildflower-sway 8s ease-in-out infinite;animation-delay:var(--delay)}
+.wildflower-stem{position:absolute;z-index:0;left:46%;top:42%;width:8%;height:58%;border-radius:999px;background:linear-gradient(90deg,#578765,#8fb886);box-shadow:inset -1px 0 #416b4d5c;transform:rotate(6deg);transform-origin:50% 100%}
+.wildflower-leaf{position:absolute;width:340%;height:22%;border-radius:10% 90% 18% 82%;background:linear-gradient(135deg,#8fbf83,#5e9469);box-shadow:0 2px 2px #345a3c2b}
+.wildflower-leaf.left{left:-315%;top:36%;transform:rotate(32deg)}
+.wildflower-leaf.right{left:65%;top:62%;transform:rotate(-29deg) scaleX(-1)}
+.wildflower-head{position:absolute;z-index:1;left:0;top:0;width:var(--size);height:var(--size);animation:wildflower-sway 8s ease-in-out infinite;animation-delay:var(--delay)}
 .wildflower-head i{position:absolute;left:31%;top:0;width:38%;height:57%;background:var(--petal);border-radius:50% 50% 43% 43%;transform-origin:50% 86%;box-shadow:inset -3px -3px 0 #fff9e547}
 .wildflower-head i:nth-child(1){transform:rotate(0)}.wildflower-head i:nth-child(2){transform:rotate(60deg)}.wildflower-head i:nth-child(3){transform:rotate(120deg)}.wildflower-head i:nth-child(4){transform:rotate(180deg)}.wildflower-head i:nth-child(5){transform:rotate(240deg)}.wildflower-head i:nth-child(6){transform:rotate(300deg)}
 .wildflower-head b{position:absolute;left:37%;top:37%;width:26%;height:26%;border-radius:50%;background:#f3c86f;border:2px solid #e9b560}
@@ -69,7 +74,7 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
 @keyframes corgi-chase{0%,100%{left:23%;top:72%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:72%;top:42%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:72%;top:42%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:23%;top:72%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
 @keyframes pup-chase{0%,100%{left:12%;top:87%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:61%;top:58%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:61%;top:58%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:12%;top:87%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
 @keyframes corgi-chase-mobile{0%,100%{left:23%;top:64%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:72%;top:34%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:72%;top:34%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:23%;top:64%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
-@keyframes pup-chase-mobile{0%,100%{left:12%;top:76%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:61%;top:47%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:61%;top:47%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:12%;top:76%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
+@keyframes pup-chase-mobile{0%,100%{left:12%;top:90%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}46%{left:61%;top:61%;transform:translate(-50%,-50%) scaleX(1) rotate(-7deg)}50%{left:61%;top:61%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}96%{left:12%;top:90%;transform:translate(-50%,-50%) scaleX(-1) rotate(7deg)}}
 @keyframes butterfly-flutter{50%{translate:0 -11px;rotate:10deg}}
 @keyframes walk-down{50%{transform:translateY(5px)}}
 @media(max-width:780px){

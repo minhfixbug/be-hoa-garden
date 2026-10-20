@@ -36,7 +36,7 @@ const walkCount = document.getElementById('walk-count');
 const flowerPlaces = [
   [3, 18], [9, 49], [2, 76], [16, 25], [20, 62], [27, 12],
   [30, 78], [34, 43], [8, 69], [14, 83], [24, 39], [35, 69],
-  [64, 15], [72, 54], [78, 28], [86, 69], [94, 16], [97, 51],
+  [64, 15], [72, 54], [79, 42], [86, 69], [94, 16], [97, 51],
   [69, 81], [82, 83], [89, 39], [74, 11], [99, 74], [66, 59],
   [45, 15], [55, 33], [41, 72], [58, 76], [48, 51], [53, 89],
   [11, 12], [32, 88], [76, 70], [91, 86], [6, 36], [97, 30],
@@ -49,10 +49,11 @@ const wildflowers = flowerPlaces.map(([x, y], index) => {
   flower.style.setProperty('--x', `${x}%`);
   flower.style.setProperty('--y', `${y}%`);
   flower.style.setProperty('--size', `${size}px`);
+  flower.style.setProperty('--plant-height', `${Math.round(size * 1.75)}px`);
   flower.style.setProperty('--petal', flowerColors[index % flowerColors.length]);
   flower.style.setProperty('--delay', `${-(index % 7) * .37}s`);
   flower.style.setProperty('--bloom-delay', `${(index % 5) * .09}s`);
-  flower.innerHTML = '<span class="wildflower-head"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></span>';
+  flower.innerHTML = '<span class="wildflower-stem"><i class="wildflower-leaf left"></i><i class="wildflower-leaf right"></i></span><span class="wildflower-head"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></span>';
   flowerField.appendChild(flower);
   return flower;
 });
