@@ -41,8 +41,15 @@
 .garden-couple.walking img{animation:couple-step .34s ease-in-out infinite alternate}
 .garden-pet{position:absolute;z-index:6;display:block;pointer-events:none;filter:drop-shadow(4px 8px 4px #35544352)}
 .garden-pet img{display:block;width:100%;height:auto;animation:pet-hop .34s ease-in-out infinite alternate}
+.garden-life .garden-pet{pointer-events:auto;appearance:none;min-height:48px;padding:0;border:0;background:transparent;cursor:pointer;line-height:0}
+.garden-pet:hover,.garden-pet:focus-visible{animation-play-state:paused}
+.garden-pet:focus-visible{outline:3px solid #b85060;outline-offset:5px;border-radius:30px}
+.garden-pet.greeted img{animation:pet-greet .4s ease-in-out 2 alternate}
 .corgi{width:116px;animation:corgi-chase 12s linear infinite}
 .black-pup{width:77px;animation:pup-chase 12s linear infinite}
+.pet-note{position:fixed;z-index:30;left:50%;bottom:24px;transform:translateX(-50%);width:max-content;max-width:min(92vw,430px);display:flex;align-items:center;gap:10px;padding:12px 12px 12px 19px;background:#fffaf0f2;border:1px solid #f1dfcb;border-radius:22px;box-shadow:0 12px 30px #52664e38;color:#765b58;font-size:13px;line-height:1.45;backdrop-filter:blur(7px)}
+.pet-note[hidden]{display:none}.pet-note button{flex:none;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:#f6e6e1;color:#a95d69;cursor:pointer;font-size:23px;line-height:1}
+.pet-note button:focus-visible{outline:3px solid #b85060;outline-offset:2px}
 .walk-guide{position:absolute;z-index:7;top:22px;right:24px;padding:10px 13px;display:flex;align-items:center;gap:11px;color:#7f806e;background:#fffdf0c7;border:1px solid #fff9e4;box-shadow:0 7px 20px #7893711d;border-radius:50px;backdrop-filter:blur(8px);font-size:9px;font-weight:700;letter-spacing:.13em}
 .walk-guide span:first-child{font-size:19px;line-height:1;color:#d88691}.walk-guide b{color:#bd6876;font-size:10px;white-space:nowrap}
 .memories .section-intro{z-index:7;min-height:91svh;margin-top:-100svh;padding:13vh 22px 14vh;max-width:none;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 40% 31% at 50% 50%,#fffaf1c8 0,#fffaf18a 65%,transparent 100%)}
@@ -51,8 +58,9 @@
 .memories .section-intro p{color:#6d7669}
 .walk-instruction{position:relative;z-index:7;width:max-content;max-width:90%;margin:-12vh auto 0;padding:12px 19px;border-radius:40px;background:#fffaf0d9;border:1px solid #f1e7d7;color:#94776e;text-align:center;font-size:12px;box-shadow:0 8px 24px #7a806414}
 .walk-instruction span{display:inline-block;margin-left:8px;color:#ce7581;font-size:17px;animation:walk-down 2s ease-in-out infinite}
-.memories .cards{position:relative;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:0;max-width:1180px;width:100%;margin:0 auto;padding:0 5%}
+.memories .cards{position:relative;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:0;max-width:1180px;width:100%;margin:0 auto;padding:0 5%;pointer-events:none}
 .memories .cards .card{width:min(42vw,425px);max-width:none;align-self:flex-start;margin:31vh 0 34vh 5%;position:relative;transform:rotate(-3deg);box-shadow:0 26px 60px #66816935,0 4px 8px #66816918}
+.memories .cards .card{pointer-events:auto}
 .memories .cards .card:nth-child(2){align-self:flex-end;margin:31vh 5% 34vh 0;transform:rotate(3deg)}
 .memories .cards .card:nth-child(3){margin-bottom:39vh;transform:rotate(-2deg)}
 .memories .cards .card::after{content:'✿';position:absolute;top:-56px;right:-21px;color:#e58f99;font-size:46px;line-height:1;text-shadow:0 4px 9px #a0666c36;opacity:.7;transform:scale(.4) rotate(-35deg);transition:transform 1s .4s,opacity 1s .4s}
@@ -67,8 +75,65 @@ body.motion-ready .memories .cards .card:nth-child(3).in-view{transform:perspect
 body.motion-ready .memories .cards .card.in-view:hover{transform:translateY(-7px) rotate(0) scale(1.02)}
 body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scale(1) rotate(8deg)}
 .memories .card-body{background:#fff}.memories .picture{height:290px}.memories .card p{font-size:14px}
+.flower-picker{margin-top:18px;padding-top:16px;border-top:1px dashed #eadad2}
+.memories .card .flower-picker-title{margin:0 0 11px;color:#aa6974;font-size:12px;font-weight:700;letter-spacing:.02em}
+.flower-choices{display:flex;gap:7px;flex-wrap:wrap}
+.flower-choice{flex:1 1 78px;min-width:0;min-height:48px;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 5px;border:1px solid #ecd9d4;border-radius:14px;background:#fff9f5;color:#7f716b;cursor:pointer;font-size:10px;font-weight:700;line-height:1.2;transition:transform .2s,box-shadow .2s,border-color .2s,background .2s}
+.flower-choice:hover{transform:translateY(-2px);box-shadow:0 5px 13px #ad777d24}
+.flower-choice.selected{background:#fff1ec;border-color:#d795a0;box-shadow:0 0 0 2px #eeb8c04d}
+.flower-choice:focus-visible{outline:3px solid #b85060;outline-offset:2px}
+.choice-flower{color:var(--choice-color);font-size:24px;line-height:1;text-shadow:0 2px 0 #ba77772e}
+.memories .card .flower-choice-status{min-height:18px;margin:9px 0 0;color:#9c8580;font-size:10px;line-height:1.5}
 .memories .memory-note{position:relative;z-index:7;min-height:54svh;margin:0;padding:12vh 20px 16vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,transparent 0,#fffaf1b8 70%,#fffaf5 100%);color:#7e806e;font-size:21px;text-shadow:0 1px #fff}
+/* The three keepsakes gather into a bouquet before the letter. */
+.garden-finale{position:relative;isolation:isolate;overflow:hidden;min-height:1070px;padding:98px 24px 104px;text-align:center;background:radial-gradient(circle at 50% 43%,#fff1d5 0,transparent 37%),radial-gradient(circle at 14% 83%,#f5ced3 0,transparent 38%),radial-gradient(circle at 88% 18%,#e3d6e9 0,transparent 35%),linear-gradient(180deg,#fffaf5,#f8e8e4 68%,#f7e5e4)}
+.garden-finale::before{content:"";position:absolute;z-index:-1;left:50%;top:34%;width:690px;height:690px;transform:translate(-50%,-50%);border:1px solid #fffdf0a8;border-radius:50%;box-shadow:0 0 0 40px #fffdf028,0 0 0 95px #fffdf01d;pointer-events:none}
+.finale-sky{position:absolute;inset:0;z-index:0;pointer-events:none}
+.finale-sky i{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff9df;box-shadow:0 0 12px 4px #fff7c9}
+.finale-sky i:nth-child(1){left:14%;top:13%}.finale-sky i:nth-child(2){right:15%;top:20%}.finale-sky i:nth-child(3){left:23%;top:43%}.finale-sky i:nth-child(4){right:24%;top:53%}.finale-sky i:nth-child(5){left:72%;top:11%}
+.wish-star{position:absolute;top:11%;right:16%;color:#f7ca6a;font-size:75px;text-shadow:0 0 14px #fff4bb,0 0 45px #f4c879;line-height:1}
+.wish-star[hidden]{display:none}.wish-star.lit{animation:wish-light 1.1s ease-out}
+.finale-copy{position:relative;z-index:2;max-width:650px;margin:0 auto}
+.finale-copy h2{margin:17px 0 14px;font-family:'Playfair Display',Georgia,serif;font-size:clamp(42px,5vw,66px);font-weight:400;line-height:1.15;letter-spacing:-.035em}
+.finale-copy h2 em{color:#bc596c}.finale-copy p{max-width:555px;margin:0 auto;color:#806d6c;font-size:15px;line-height:1.7}
+.finale-stage{position:relative;z-index:1;width:min(900px,100%);height:490px;margin:15px auto 0}
+.finale-glow{position:absolute;left:50%;top:43%;width:min(620px,90vw);height:360px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,#fffde4ad,transparent 70%);filter:blur(6px)}
+.keepsake-bouquet{position:absolute;z-index:2;left:50%;top:0;width:390px;height:490px;transform:translateX(-50%);filter:drop-shadow(0 23px 15px #9b6a6745)}
+.keepsake-stem{position:absolute;z-index:1;left:49%;bottom:82px;width:9px;height:300px;border-radius:8px;background:linear-gradient(90deg,#608766,#9db78b);transform-origin:50% 100%}
+.keepsake-stem i{position:absolute;top:51%;left:-30px;width:37px;height:18px;border-radius:90% 0 90% 0;background:#90ae7f;transform:rotate(28deg)}
+.keepsake-stem.stem-one{height:305px;transform:rotate(-18deg)}.keepsake-stem.stem-two{height:337px;transform:rotate(0)}.keepsake-stem.stem-three{height:270px;transform:rotate(20deg)}
+.keepsake-flower{position:absolute;z-index:3;width:130px;height:130px;transform-origin:50% 75%;transition:transform .9s cubic-bezier(.17,1.3,.3,1),opacity .5s}
+.keepsake-flower.bloom-one{left:26px;top:73px;--flight-x:-260px;--flight-y:100px;transition-delay:.1s}
+.keepsake-flower.bloom-two{left:130px;top:25px;--flight-x:0px;--flight-y:-220px;transition-delay:.35s}
+.keepsake-flower.bloom-three{left:232px;top:91px;--flight-x:260px;--flight-y:80px;transition-delay:.6s}
+.keepsake-flower i{position:absolute;left:39px;top:5px;width:52px;height:73px;border-radius:50% 50% 42% 42%;background:var(--petal,#edabb6);transform-origin:50% 60px;box-shadow:inset -6px -6px 0 #fff8e061,0 3px 6px #81596d2b}
+.keepsake-flower i:nth-child(1){transform:rotate(0)}.keepsake-flower i:nth-child(2){transform:rotate(60deg)}.keepsake-flower i:nth-child(3){transform:rotate(120deg)}.keepsake-flower i:nth-child(4){transform:rotate(180deg)}.keepsake-flower i:nth-child(5){transform:rotate(240deg)}.keepsake-flower i:nth-child(6){transform:rotate(300deg)}
+.keepsake-flower b{position:absolute;left:49px;top:49px;width:32px;height:32px;border-radius:50%;background:#f9cb78;border:4px solid #edb568;box-shadow:inset 0 0 0 3px #ffdfa1}
+.keepsake-flower[data-type="daisy"] i{width:39px;left:45px;border-radius:55% 55% 38% 38%}
+.keepsake-flower[data-type="rose"] i{border-radius:55% 48% 52% 45%}
+.keepsake-flower[data-type="violet"] i{border-radius:48% 54% 44% 50%}
+.keepsake-wrap{position:absolute;z-index:4;left:94px;bottom:9px;width:205px;height:185px;display:flex;align-items:center;justify-content:center;clip-path:polygon(0 0,100% 0,82% 100%,21% 100%);background:linear-gradient(145deg,#fff0df,#e9cdbb);box-shadow:inset 0 0 0 3px #fff9ef}
+.keepsake-wrap::before{content:"";position:absolute;left:0;right:0;top:0;height:51px;background:#fff9f0a1;border-bottom:2px solid #d9b9a9}
+.keepsake-wrap span{position:relative;margin-top:33px;color:#b35f71;font-family:'Playfair Display',Georgia,serif;font-size:22px;font-style:italic}
+.finale-friends{position:absolute;z-index:3;inset:0;pointer-events:none;transition:transform .8s 1s,opacity .8s 1s}
+.finale-couple{position:absolute;right:4%;bottom:-8px;width:170px;filter:drop-shadow(4px 9px 4px #937c744d)}
+.finale-dog{position:absolute;bottom:8px;filter:drop-shadow(3px 7px 4px #937c744d)}
+.corgi-finale{left:5%;width:118px}.black-finale{left:17%;width:76px;bottom:14px}
+.garden-finale.will-reveal:not(.revealed) .keepsake-flower{opacity:0;transform:translate(var(--flight-x),var(--flight-y)) scale(.2) rotate(-22deg)}
+.garden-finale.will-reveal:not(.revealed) .finale-friends{opacity:0;transform:translateY(30px)}
+.bouquet-caption{position:relative;z-index:3;max-width:550px;margin:5px auto 33px;color:#a66071;font-family:'Playfair Display',Georgia,serif;font-size:20px;font-style:italic;line-height:1.5}
+.wish-card{position:relative;z-index:3;width:min(620px,100%);margin:0 auto;padding:25px 29px 20px;border:1px solid #f3dbd5;border-radius:25px;background:#fffaf5e6;box-shadow:0 18px 45px #9d748326;backdrop-filter:blur(7px)}
+.wish-icon{display:block;color:#d78e9b;font-size:32px;line-height:1}.wish-card label{display:block;margin:8px 0 6px;color:#6f5558;font-family:'Playfair Display',Georgia,serif;font-size:23px}
+.wish-card>p{margin:0 0 17px;color:#927d79;font-size:12px;line-height:1.5}
+.wish-card form{display:flex;gap:8px}.wish-card input{flex:1;min-width:0;height:48px;padding:0 16px;border:1px solid #e9c9c3;border-radius:25px;background:#fff;color:#604d4d;font:14px 'DM Sans',Arial,sans-serif}
+.wish-card input:focus-visible,.wish-card button:focus-visible{outline:3px solid #b85060;outline-offset:2px}
+.wish-card form button{min-height:48px;padding:0 18px;border:0;border-radius:25px;background:#cc7180;color:white;cursor:pointer;font-size:12px;font-weight:700;white-space:nowrap}
+.wish-card form button:hover{background:#b85060}.wish-card form button span{margin-left:6px;font-size:16px}
+.wish-card .wish-result{min-height:20px;margin:12px 0 4px;color:#aa6576;font-size:12px;overflow-wrap:anywhere}
+.wish-card small{color:#9f8c88;font-size:10px}
 @keyframes wildflower-sway{50%{transform:rotate(7deg)}}
+@keyframes pet-greet{to{transform:translateY(-12px) rotate(-10deg) scale(1.08)}}
+@keyframes wish-light{0%{opacity:0;transform:scale(.2) rotate(-35deg)}55%{opacity:1;transform:scale(1.2) rotate(12deg)}100%{transform:scale(1) rotate(0)}}
 @keyframes bloom-ring{18%{opacity:.9;scale:.5}100%{opacity:0;scale:1.55}}
 @keyframes pond-ripple{0%{opacity:.75;scale:.4}80%,100%{opacity:0;scale:1.7}}
 @keyframes tree-breeze{to{rotate:2deg}}
@@ -104,7 +169,11 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
   .memories .cards .card:nth-child(2){transform:rotate(2deg)}
   .memories .picture{height:260px}
   .memories .memory-note{font-size:17px;min-height:46svh;text-align:center}
+  .garden-finale{min-height:0;padding:82px 20px 80px}
+  .finale-stage{height:440px}.keepsake-bouquet{transform:translateX(-50%) scale(.86);transform-origin:top center}
+  .finale-couple{right:0;width:115px}.corgi-finale{left:1%;width:88px}.black-finale{left:16%;width:57px}
 }
 @media(max-width:480px){.walk-guide span:nth-child(2){letter-spacing:.05em}.garden-land{inset:-25% -9%;transform:perspective(850px) rotateX(40deg) scale(1.17);transform-origin:50% 54%}.garden-pond{top:12%;right:-12%;width:130px;height:105px}.garden-tree{filter:saturate(.93)}.wildflower{--bloom-scale:.8}.garden-couple{width:118px}.corgi{width:88px}.black-pup{width:59px}.memories .section-intro h2{font-size:40px}.memories .cards .card,.memories .cards .card:nth-child(2),.memories .cards .card:nth-child(3){margin-top:34vh;margin-bottom:40vh}.memories .cards .card::after{right:2px}.memories .cards .card:nth-child(2)::after{left:2px}}
 @media(max-width:480px){.corgi{animation-name:corgi-chase-mobile}.black-pup{animation-name:pup-chase-mobile}}
+@media(max-width:480px){.flower-choice{flex-basis:78px;min-height:58px;flex-direction:column;gap:1px}.flower-choice .choice-label{font-size:10px}.garden-finale{padding:74px 16px 74px}.finale-copy h2{font-size:42px}.finale-copy p{font-size:13px}.finale-stage{height:380px;margin-top:22px}.keepsake-bouquet{transform:translateX(-50%) scale(.72)}.finale-couple{width:78px;right:-3%;bottom:12px}.corgi-finale{width:69px;left:-4%;bottom:11px}.black-finale{width:45px;left:13%;bottom:14px}.bouquet-caption{font-size:17px;margin-top:0}.wish-card{padding:22px 18px 18px}.wish-card label{font-size:20px}.wish-card form{flex-direction:column}.wish-card input{flex:none;min-height:48px;width:100%}.wish-card form button{width:100%}.wish-star{right:8%;top:22%;font-size:53px}.pet-note{bottom:18px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.wildflower-head,.walk-butterfly,.walk-instruction span,.garden-pet,.garden-pet img,.garden-tree,.garden-land::after,.garden-pond::before,.wildflower.awake::after,.garden-couple.walking img{animation:none}.wildflower,.garden-couple{transition:none}.corgi{left:65%;top:70%;transform:translate(-50%,-50%)}.black-pup{left:45%;top:75%;transform:translate(-50%,-50%)}body.motion-ready .memories .cards .card{opacity:1;transform:none}body.motion-ready .memories .cards .card .picture{clip-path:none}}

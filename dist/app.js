@@ -123,6 +123,150 @@ function burstPetals(element, count) {
   }
 }
 
+const flowerTypes = [
+  { id: 'rose', name: 'Hồng phấn', color: '#eb9bab' },
+  { id: 'daisy', name: 'Cúc nắng', color: '#ffe0a1' },
+  { id: 'violet', name: 'Hoa tím', color: '#c9acdc' },
+];
+const defaultFlowers = ['rose', 'daisy', 'violet'];
+const keepsakeKey = 'be-hoa-garden-keepsakes-v1';
+let savedKeepsakes = {};
+try { savedKeepsakes = JSON.parse(window.localStorage.getItem(keepsakeKey) || '{}') || {}; } catch { /* Private browsing may disable storage. */ }
+const chosenFlowers = Array.from({ length: 3 }, (_, index) => {
+  const id = savedKeepsakes.flowers?.[index];
+  return flowerTypes.some(flower => flower.id === id) ? id : null;
+});
+let savedWish = typeof savedKeepsakes.wish === 'string' ? savedKeepsakes.wish.slice(0, 80) : '';
+const finale = document.getElementById('garden-finale');
+const bouquetCaption = document.getElementById('bouquet-caption');
+const bouquetBlooms = [...document.querySelectorAll('[data-bouquet-slot]')];
+
+function saveKeepsakes() {
+  try { window.localStorage.setItem(keepsakeKey, JSON.stringify({ flowers: chosenFlowers, wish: savedWish })); } catch { /* The experience still works without persistence. */ }
+}
+
+function updateBouquet() {
+  bouquetBlooms.forEach((bloom, index) => {
+    const flower = flowerTypes.find(item => item.id === (chosenFlowers[index] || defaultFlowers[index]));
+    bloom.style.setProperty('--petal', flower.color);
+    bloom.dataset.type = flower.id;
+  });
+  const count = chosenFlowers.filter(Boolean).length;
+  bouquetCaption.textContent = count === 0
+    ? 'Bó hoa này đã chờ em từ đầu khu vườn. Em có thể đổi từng bông ở các kỷ niệm phía trên.'
+    : count === 3
+      ? 'Ba bông em chọn đã thành một bó hoa chỉ thuộc về Bé Hoa ♡'
+      : `Anh đã giữ ${count} bông em chọn trong bó hoa này. Những bông còn lại anh cắm sẵn cho em ♡`;
+}
+
+document.querySelectorAll('.memories .card').forEach((card, index) => {
+  const picker = document.createElement('div');
+  picker.className = 'flower-picker';
+  const heading = document.createElement('p');
+  heading.className = 'flower-picker-title';
+  heading.textContent = 'Em muốn giữ bông nào?';
+  const choices = document.createElement('div');
+  choices.className = 'flower-choices';
+  choices.setAttribute('role', 'group');
+  choices.setAttribute('aria-label', `Chọn hoa cho kỷ niệm ${index + 1}`);
+  const status = document.createElement('p');
+  status.className = 'flower-choice-status';
+  status.setAttribute('aria-live', 'polite');
+  flowerTypes.forEach(flower => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'flower-choice';
+    button.style.setProperty('--choice-color', flower.color);
+    button.setAttribute('aria-label', `Chọn ${flower.name} cho kỷ niệm ${index + 1}`);
+    button.dataset.flower = flower.id;
+    button.innerHTML = '<span class="choice-flower" aria-hidden="true">✿</span><span class="choice-label"></span>';
+    button.querySelector('.choice-label').textContent = flower.name;
+    button.addEventListener('click', () => {
+      chosenFlowers[index] = flower.id;
+      saveKeepsakes();
+      renderChoice();
+      updateBouquet();
+      burstPetals(button, 9);
+    });
+    choices.appendChild(button);
+  });
+  function renderChoice() {
+    choices.querySelectorAll('button').forEach(button => {
+      const selected = button.dataset.flower === chosenFlowers[index];
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    const selectedFlower = flowerTypes.find(flower => flower.id === chosenFlowers[index]);
+    status.textContent = selectedFlower ? `Đã giữ ${selectedFlower.name.toLowerCase()} cho bó hoa của em ♡` : 'Chọn nếu em thích, không cần chọn đủ nhé.';
+  }
+  picker.append(heading, choices, status);
+  card.querySelector('.card-body').appendChild(picker);
+  renderChoice();
+});
+updateBouquet();
+
+const wishForm = document.getElementById('wish-form');
+const wishInput = document.getElementById('wish-input');
+const wishStar = document.getElementById('wish-star');
+const wishResult = document.getElementById('wish-result');
+function showWish() {
+  wishInput.value = savedWish;
+  wishStar.hidden = !savedWish;
+  wishResult.textContent = savedWish ? `Ngôi sao của em đang giữ điều ước: “${savedWish}”` : '';
+}
+showWish();
+wishForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const wish = wishInput.value.trim().replace(/\s+/g, ' ').slice(0, 80);
+  if (!wish) { wishInput.focus(); return; }
+  savedWish = wish;
+  saveKeepsakes();
+  showWish();
+  wishStar.classList.remove('lit');
+  requestAnimationFrame(() => wishStar.classList.add('lit'));
+  burstPetals(wishStar, 15);
+});
+
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  finale.classList.add('will-reveal');
+  const finaleObserver = new IntersectionObserver((entries, observer) => {
+    if (!entries[0]?.isIntersecting) return;
+    finale.classList.add('revealed');
+    window.setTimeout(() => burstPetals(document.getElementById('keepsake-bouquet'), 20), 1200);
+    observer.disconnect();
+  }, { threshold: .18 });
+  finaleObserver.observe(finale);
+}
+
+const petNote = document.getElementById('pet-note');
+const petNoteText = document.getElementById('pet-note-text');
+let lastPet = null;
+[
+  ['pet-corgi', 'Gâu! Anh nhờ tớ giữ lại nụ cười của Bé Hoa đấy ♡'],
+  ['pet-black', 'Bí mật nhỏ: có Bé Hoa ở đây, khu vườn mới thật sự nở hoa ✿'],
+].forEach(([id, message]) => {
+  const pet = document.getElementById(id);
+  pet.addEventListener('click', () => {
+    lastPet = pet;
+    petNoteText.textContent = message;
+    petNote.hidden = false;
+    pet.classList.remove('greeted');
+    void pet.offsetWidth;
+    pet.classList.add('greeted');
+    window.setTimeout(() => pet.classList.remove('greeted'), 1200);
+    burstPetals(pet, 8);
+  });
+});
+document.getElementById('pet-note-close').addEventListener('click', () => {
+  petNote.hidden = true;
+  lastPet?.focus();
+});
+window.addEventListener('scroll', () => {
+  if (petNote.hidden) return;
+  const bounds = memories.getBoundingClientRect();
+  if (bounds.bottom < 0 || bounds.top > window.innerHeight) petNote.hidden = true;
+}, { passive: true });
+
 let bloomStarted = false;
 bloomButton.addEventListener('click', () => {
   if (bloomStarted) {
