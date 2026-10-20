@@ -16,10 +16,19 @@
 
   const art = {
     rose: () => `
-      ${ring(8, 'M50 9 C63 10 70 23 66 34 C62 47 52 51 45 45 C34 35 37 18 50 9Z', ['#ed9aab', '#df7f96', '#f2afba'])}
-      ${ring(6, 'M50 28 C61 25 67 36 63 45 C58 55 49 57 43 51 C36 44 40 32 50 28Z', ['#dc708b', '#ed9ba9'], 17)}
-      <circle cx="50" cy="50" r="12" fill="#d9718a"/><path d="M39 52 C39 42 55 37 61 45 C66 53 57 62 48 58 C42 56 43 48 49 46 C54 44 57 48 55 52" fill="none" stroke="#a94b6a" stroke-width="3.2" stroke-linecap="round"/>
-      <path d="M35 28 Q41 24 45 28 M63 28 Q57 24 54 28" fill="none" stroke="#ffe1df" stroke-width="2" stroke-linecap="round" opacity=".75"/>`,
+      <path d="M47 12 C32 5 18 15 16 31 C6 42 12 58 20 65 C18 79 29 89 43 88 C54 98 70 91 77 81 C91 77 96 61 87 49 C91 31 79 17 64 16 C59 10 53 10 47 12Z" fill="#c8657d" stroke="#a9526b" stroke-width="1.5"/>
+      <path d="M47 13 C32 7 18 20 18 38 C28 35 37 39 43 44 C43 31 49 23 59 20 C56 15 52 13 47 13Z" fill="#f6b3bd" stroke="#cc7189" stroke-width="1.6"/>
+      <path d="M55 17 C72 9 85 24 82 41 C76 39 68 40 61 46 C58 33 51 27 44 23 C48 19 51 18 55 17Z" fill="#ed98aa" stroke="#c66480" stroke-width="1.6"/>
+      <path d="M18 39 C8 50 18 67 31 74 C35 63 42 56 50 52 C40 44 28 39 18 39Z" fill="#e78ba0" stroke="#bb5975" stroke-width="1.6"/>
+      <path d="M82 40 C96 51 85 70 73 75 C68 64 61 57 52 53 C64 45 73 40 82 40Z" fill="#f3a8b4" stroke="#c66480" stroke-width="1.6"/>
+      <path d="M31 73 C29 87 46 94 53 86 C66 93 78 83 74 72 C67 73 57 68 51 59 C46 67 39 72 31 73Z" fill="#dc7892" stroke="#ad506c" stroke-width="1.6"/>
+      <path d="M31 47 C28 36 40 28 50 32 C59 26 71 33 69 44 C78 53 70 67 60 68 C52 76 38 70 35 62 C25 60 25 51 31 47Z" fill="#d66e88" stroke="#aa4d69" stroke-width="1.3"/>
+      <path d="M31 47 C32 37 41 33 49 34 C43 42 43 47 50 51 C43 56 35 54 31 47Z" fill="#f4a8b5"/>
+      <path d="M50 34 C59 28 70 37 67 46 C63 50 58 51 52 49 C57 44 56 39 50 34Z" fill="#e98da2"/>
+      <path d="M37 57 C43 53 49 53 52 49 C54 59 58 64 64 66 C53 73 41 67 37 57Z" fill="#ef9bad"/>
+      <path d="M52 49 C58 50 63 49 67 45 C75 53 67 64 61 65 C58 57 55 53 52 49Z" fill="#bc5874"/>
+      <path d="M43 49 C43 40 55 38 61 44 C66 50 61 57 54 57 C47 58 44 53 48 48 C52 44 57 46 56 50" fill="none" stroke="#9f405e" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M25 31 Q31 27 37 31 M66 25 Q72 26 76 32 M26 62 Q31 66 37 65 M67 77 Q61 81 56 78" fill="none" stroke="#ffe2df" stroke-width="2" stroke-linecap="round" opacity=".76"/>`,
     daisy: () => `
       ${ring(12, 'M50 5 C58 9 60 24 57 40 Q50 47 43 40 C40 24 42 9 50 5Z', ['#fffdf0', '#fff5da', '#f7efd7'])}
       <circle cx="50" cy="50" r="17" fill="#f0b951" stroke="#e7a74d" stroke-width="2"/>
