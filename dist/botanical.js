@@ -7,6 +7,12 @@
     const angle = index * Math.PI * 2 / count;
     return `<circle cx="${(50 + Math.cos(angle) * radius).toFixed(1)}" cy="${(50 + Math.sin(angle) * radius).toFixed(1)}" r="1.6" fill="${fill}"/>`;
   }).join('');
+  const hydrangeaBlossoms = [
+    [49, 15], [34, 21], [65, 22], [23, 35], [43, 34], [59, 37], [77, 38],
+    [17, 52], [33, 51], [50, 53], [68, 54], [83, 54], [25, 68], [42, 70],
+    [59, 72], [75, 69], [36, 84], [54, 85], [67, 82],
+  ];
+  const hydrangeaColors = ['#b8dbe9', '#c9bde5', '#a9d0e6', '#d8c7eb', '#c5dfe8'];
 
   const art = {
     rose: () => `
@@ -45,6 +51,17 @@
       ${ring(8, 'M50 8 Q60 13 67 24 L63 38 Q56 47 50 46 Q44 47 37 38 L33 24 Q40 13 50 8Z', ['#f4b8b7', '#e994a6', '#f7c8bd'], 22)}
       <circle cx="50" cy="50" r="15" fill="#f5c767" stroke="#e5a958" stroke-width="2"/>${dots(10, 9, '#e69b4f')}
       <path d="M35 24 L39 28 M64 25 L61 29" stroke="#ffe5d8" stroke-width="2" opacity=".7"/>`,
+    hydrangea: () => `
+      <path d="M50 8 C77 6 94 29 91 54 C90 78 71 94 49 92 C21 96 7 75 10 51 C10 27 24 11 50 8Z" fill="#a6cbbf" opacity=".72"/>
+      ${hydrangeaBlossoms.map(([x, y], index) => {
+        const color = hydrangeaColors[index % hydrangeaColors.length];
+        const turn = index % 3 * 14 - 14;
+        return `<g transform="translate(${x} ${y}) rotate(${turn})" fill="${color}" stroke="#fffaf5" stroke-width=".7">
+          <ellipse cy="-5.5" rx="5.5" ry="7"/><ellipse cx="5.5" rx="7" ry="5.5"/>
+          <ellipse cy="5.5" rx="5.5" ry="7"/><ellipse cx="-5.5" rx="7" ry="5.5"/>
+          <circle r="2.5" fill="#f6dfa4" stroke="none"/>
+        </g>`;
+      }).join('')}`,
   };
 
   function flowerHeadSvg(id) {
@@ -52,5 +69,5 @@
     return `<svg class="botanical-svg botanical-${id}" viewBox="0 0 100 100" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">${draw()}</svg>`;
   }
 
-  window.BeHoaBotanical = { flowerHeadSvg, gardenSpecies: ['rose', 'daisy', 'violet', 'peony', 'tulip', 'sunflower', 'cosmos'] };
+  window.BeHoaBotanical = { flowerHeadSvg, gardenSpecies: ['rose', 'daisy', 'violet', 'peony', 'tulip', 'sunflower', 'cosmos', 'hydrangea'] };
 })();

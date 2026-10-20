@@ -39,6 +39,7 @@
 .species-sunflower .wildflower-stem{width:11%}.species-sunflower .wildflower-leaf{width:400%;height:26%}
 .species-cosmos .wildflower-leaf{width:260%;height:12%;border-radius:20% 90% 10% 90%}
 .species-peony .wildflower-leaf,.species-rose .wildflower-leaf{width:390%;height:24%}
+.species-hydrangea .wildflower-leaf{width:360%;height:28%;border-radius:15% 85% 20% 80%}
 .wildflower-head i{position:absolute;left:31%;top:0;width:38%;height:57%;background:var(--petal);border-radius:50% 50% 43% 43%;transform-origin:50% 86%;box-shadow:inset -3px -3px 0 #fff9e547}
 .wildflower-head i:nth-child(1){transform:rotate(0)}.wildflower-head i:nth-child(2){transform:rotate(60deg)}.wildflower-head i:nth-child(3){transform:rotate(120deg)}.wildflower-head i:nth-child(4){transform:rotate(180deg)}.wildflower-head i:nth-child(5){transform:rotate(240deg)}.wildflower-head i:nth-child(6){transform:rotate(300deg)}
 .wildflower-head b{position:absolute;left:37%;top:37%;width:26%;height:26%;border-radius:50%;background:#f3c86f;border:2px solid #e9b560}
@@ -86,6 +87,7 @@ body.motion-ready .memories .cards .card.in-view::after{opacity:1;transform:scal
 .flower-picker{margin-top:18px;padding-top:16px;border-top:1px dashed #eadad2}
 .memories .card .flower-picker-title{margin:0 0 11px;color:#aa6974;font-size:12px;font-weight:700;letter-spacing:.02em}
 .flower-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.flower-choice:last-child:nth-child(3n+1){grid-column:2}
 .flower-choice{min-width:0;min-height:71px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 4px;border:1px solid #ecd9d4;border-radius:14px;background:#fff9f5;color:#7f716b;cursor:pointer;font-size:10px;font-weight:700;line-height:1.2;transition:transform .2s,box-shadow .2s,border-color .2s,background .2s}
 .flower-choice:hover{transform:translateY(-2px);box-shadow:0 5px 13px #ad777d24}
 .flower-choice.selected{background:#fff1ec;border-color:#d795a0;box-shadow:0 0 0 2px #eeb8c04d}

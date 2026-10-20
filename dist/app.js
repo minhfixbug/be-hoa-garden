@@ -128,12 +128,13 @@ function burstPetals(element, count) {
 }
 
 const flowerTypes = [
-  { id: 'rose', name: 'Hồng nhung' },
+  { id: 'rose', name: 'Hoa hồng' },
   { id: 'daisy', name: 'Cúc họa mi' },
   { id: 'violet', name: 'Oải hương' },
   { id: 'peony', name: 'Mẫu đơn' },
   { id: 'tulip', name: 'Tulip đào' },
   { id: 'sunflower', name: 'Hướng dương' },
+  { id: 'hydrangea', name: 'Cẩm tú cầu' },
 ];
 const defaultFlowers = ['rose', 'daisy', 'violet'];
 const keepsakeKey = 'be-hoa-garden-keepsakes-v1';
